@@ -2,5 +2,6 @@
 *.jpg
 *.png
 *.bmp
+/.vscode
 Cargo.lock
 \target
