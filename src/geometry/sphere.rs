@@ -1,20 +1,20 @@
-use crate::hittable::*;
-use crate::ray::Ray;
-use crate::vec3::Vec3;
+use crate::geometry::hittable::*;
+use crate::geometry::ray::Ray;
+use crate::tools::vec3::Vec3;
 
 pub struct Sphere {
     center: Vec3,
-    radius: f32,
+    radius: f64,
 }
 
 impl Sphere {
-    pub fn sphere(center: Vec3, radius: f32) -> Sphere {
+    pub fn sphere(center: Vec3, radius: f64) -> Sphere {
         Sphere { center, radius }
     }
 }
 
 impl Hittable for Sphere {
-    fn hit(&self, r: &Ray, t_min: f32, t_max: f32, rec: &mut HitRecord) -> bool {
+    fn hit(&self, r: &Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
         let oc = r.origin() - self.center;
         let a = Vec3::dot(&r.direction(), &r.direction());
         let b = Vec3::dot(&oc, &r.direction());
