@@ -59,10 +59,10 @@ fn main() -> io::Result<()> {
     let hitable_list = HittableList::new(Box);
     let cam = Camera::new(lookfrom, lookat, vup, vof, aspect_ratio, aperture);
     let mut renderer = Renderer::new(cam, hitable_list.into());
-    renderer.set_photo_name("Book1.png".to_owned());
+    renderer.set_photo_name("Book1.bmp".to_owned());
     renderer.set_width_and_ratio(1200, aspect_ratio);
     renderer.set_samples_per_pixel(1000);
-    renderer.set_max_depth(5);
+    renderer.set_max_depth(10);
     renderer.render();
 
     Ok(())

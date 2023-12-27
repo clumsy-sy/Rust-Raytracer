@@ -34,7 +34,7 @@ fn main() -> io::Result<()> {
     let hitable_list = HittableList::new(world);
     let cam = Camera::new(lookfrom, lookat, vup, vof, aspect_ratio, aperture);
     let mut renderer = Renderer::new(cam, hitable_list.into());
-    renderer.set_photo_name("Sphere.png".to_owned());
+    renderer.set_photo_name("Sphere3.bmp".to_owned());
     renderer.set_max_depth(20);
     renderer.set_samples_per_pixel(2048);
     renderer.render ();
