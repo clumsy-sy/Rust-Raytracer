@@ -1,31 +1,80 @@
-use crate::geometry::hittable::{HitRecord, Hittable};
-use crate::geometry::ray::Ray;
+use std::ops::Range;
+
+use crate::geometry::{hittable::{HitRecord, Hittable}, ray::Ray, aabb::AABB};
 
 pub struct HittableList {
     list: Vec<Box<dyn Hittable>>,
+    aabb: AABB,
 }
+
+impl Default for HittableList {
+    fn default() -> Self {
+        Self {
+            list: Default::default(),
+            aabb: Default::default(),
+        }
+    }
+}
+
+unsafe impl Send for HittableList {}
+unsafe impl Sync for HittableList {}
 
 impl HittableList {
     pub fn new(list: Vec<Box<dyn Hittable>>) -> HittableList {
-        HittableList { list }
+        let aabb = HittableList::bounding_box(&list);
+        HittableList { list, aabb}
+    }
+    fn bounding_box(list: &Vec<Box<dyn Hittable>>) -> AABB{
+        let mut aabb = AABB::default();
+        for item in list{
+            match item.bbox() {
+                Some(shape_box) => {
+                    aabb = AABB::from_boxes(&aabb, &shape_box)
+                },
+                None => {},
+            }
+            
+        }
+        aabb
+    }
+    pub fn into_objects(self) -> Vec<Box<dyn Hittable>> {
+        self.list
     }
 }
 
 impl Hittable for HittableList {
-    fn hit(&self, r: &Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
+    fn hit(&self, r: &Ray, interval: Range<f64>) -> Option<HitRecord> {
+        // print!("hit!");
         let mut temp_rec = HitRecord::default();
         let mut hit_anything = false;
-        let mut closest_so_far = t_max;
+        let mut closest_so_far = interval.end;
 
         for object in &self.list {
-            if object.hit(r, t_min, closest_so_far, &mut temp_rec) {
-                hit_anything = true;
-                closest_so_far = temp_rec.t();
-                rec.set_t(temp_rec.t());
-                rec.set_p(temp_rec.p());
-                rec.set_normal(temp_rec.normal());
-            }
+            let now = object.hit(
+                r,
+                Range {
+                    start: interval.start,
+                    end: closest_so_far,
+                },
+            );
+            match now {
+                Some(hitrec) => {
+                    // print!("hit!!!");
+                    hit_anything = true;
+                    closest_so_far = hitrec.t;
+                    temp_rec = hitrec;
+                }
+                None => {}
+            };
         }
-        hit_anything
+        if hit_anything {
+            Some(temp_rec)
+        } else {
+            None
+        }
+    }
+
+    fn bbox(&self) -> Option<super::AABB> {
+        Some(self.aabb)
     }
 }
