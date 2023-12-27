@@ -5,3 +5,4 @@
 /.vscode
 Cargo.lock
 \target
+!/images/
