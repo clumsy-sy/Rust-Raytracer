@@ -1,8 +1,8 @@
 *.ppm
 *.jpg
 *.png
-*.bmp
 /.vscode
 Cargo.lock
 \target
 !/images/
+!/images/*.bmp/
