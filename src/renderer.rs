@@ -82,13 +82,13 @@ impl Renderer {
         self.background = c;
     }
 
-    pub fn set_width_and_ratio(&mut self, width: u32, ratio: f64){
+    pub fn set_width_and_ratio(&mut self, width: u32, ratio: f64) {
         self.image_width = width;
         self.aspect_ratio = ratio;
         self.image_height = (width as f64 / ratio) as u32;
     }
 
-    pub fn set_image_size(&mut self, width: u32, height: u32){
+    pub fn set_image_size(&mut self, width: u32, height: u32) {
         self.image_width = width;
         self.image_height = height;
         self.aspect_ratio = width as f64 / height as f64;

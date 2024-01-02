@@ -1,6 +1,6 @@
-use crate::vector::vec3::Vec3;
-use crate::materials::material::*;
 use super::hittable::Hittable;
+use crate::materials::material::*;
+use crate::vector::vec3::Vec3;
 
 #[derive(Debug, Copy, Clone)]
 pub struct Ray {

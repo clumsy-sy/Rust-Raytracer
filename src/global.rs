@@ -3,12 +3,11 @@ use {
         distributions::uniform::SampleUniform, rngs::StdRng, seq::SliceRandom, thread_rng, Rng,
         RngCore, SeedableRng,
     },
-    std::ops::Range,
     std::f64,
     std::io::{self, Write},
+    std::ops::Range,
     std::sync::{Arc, Mutex},
 };
-
 
 // double inf
 const INFINITY: f64 = f64::INFINITY;

@@ -6,6 +6,12 @@
 
 利用 Rust 实现一个光线追踪渲染器，主要的实现内容来自 [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)，原文是用 C++ 实现的光线追踪渲染器的课程。
 
+## 编译运行
+
+```shell
+cargo run --example [文件名(不带 .rs)] --release
+```
+
 ### 基础
 
 - [x] 实现  [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) 内所有内容
@@ -24,15 +30,10 @@
 - [ ] 实现 Ray Tracing in One Weekend  —  The Book Series 的第三本，[Ray Tracing: The Rest of Your Life](https://raytracing.github.io/books/RayTracingTheRestOfYourLife.html)
 - [ ] 更多图形学技术，例如：BVH-SAH 算法、 BVH 并行化构建、曲面细分、降噪、Physically Based Rendering……
 
-## 编译运行
-
-```shell
-cargo run --example [文件名(不带 .rs)] --release
-```
 
 ## 图片
 
-![Alt](images/Book1.bmp)
+![Alt](images/Book1_1.bmp)
 
 **上图信息** 
 > CPU： i9-13980HX  
@@ -40,6 +41,8 @@ cargo run --example [文件名(不带 .rs)] --release
 > 单像素采样数：1000  
 > 递归深度： 10  
 > 运行时间：4:34.41  
+
+![Alt](images/Book1_2.bmp)
 
 ## 参考材料
 

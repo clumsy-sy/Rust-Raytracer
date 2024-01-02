@@ -1,6 +1,10 @@
 use std::ops::Range;
 
-use crate::geometry::{hittable::{HitRecord, Hittable}, ray::Ray, aabb::AABB};
+use crate::geometry::{
+    aabb::AABB,
+    hittable::{HitRecord, Hittable},
+    ray::Ray,
+};
 
 pub struct HittableList {
     list: Vec<Box<dyn Hittable>>,
@@ -22,18 +26,15 @@ unsafe impl Sync for HittableList {}
 impl HittableList {
     pub fn new(list: Vec<Box<dyn Hittable>>) -> HittableList {
         let aabb = HittableList::bounding_box(&list);
-        HittableList { list, aabb}
+        HittableList { list, aabb }
     }
-    fn bounding_box(list: &Vec<Box<dyn Hittable>>) -> AABB{
+    fn bounding_box(list: &Vec<Box<dyn Hittable>>) -> AABB {
         let mut aabb = AABB::default();
-        for item in list{
+        for item in list {
             match item.bbox() {
-                Some(shape_box) => {
-                    aabb = AABB::from_boxes(&aabb, &shape_box)
-                },
-                None => {},
+                Some(shape_box) => aabb = AABB::from_boxes(&aabb, &shape_box),
+                None => {}
             }
-            
         }
         aabb
     }

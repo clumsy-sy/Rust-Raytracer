@@ -1,7 +1,12 @@
 use std::{cmp::Ordering, ops::Range};
 
 use crate::{
-    geometry::{aabb::AABB, hittable::{Hittable, HitRecord}, hittable_list::HittableList, ray::Ray},
+    geometry::{
+        aabb::AABB,
+        hittable::{HitRecord, Hittable},
+        hittable_list::HittableList,
+        ray::Ray,
+    },
     global::Random,
 };
 
@@ -43,10 +48,7 @@ impl BVH {
         }
     }
 
-    fn new_internal(
-        objects: &mut Vec<Option<Box<dyn Hittable>>>,
-        index: Range<usize>,
-    ) -> Self {
+    fn new_internal(objects: &mut Vec<Option<Box<dyn Hittable>>>, index: Range<usize>) -> Self {
         let count = index.end - index.start;
 
         if count == 1 {
@@ -83,10 +85,7 @@ impl BVH {
                 )
             });
             let mid = index.start + count / 2;
-            let left = Box::new(Self::new_internal(
-                objects,
-                index.start..mid,
-            ));
+            let left = Box::new(Self::new_internal(objects, index.start..mid));
             let right = Box::new(Self::new_internal(objects, mid..index.end));
             Self {
                 bbox: Some(left.bbox.as_ref().unwrap() | right.bbox.as_ref().unwrap()),
@@ -110,10 +109,8 @@ impl Hittable for BVH {
             .as_ref()
             .and_then(|left| left.hit(ray, interval.clone()));
         let hit_right = self.right.as_ref().and_then(|right| {
-            let right_limit = interval.start
-                ..hit_left
-                    .as_ref()
-                    .map_or(interval.end, |record| record.t);
+            let right_limit =
+                interval.start..hit_left.as_ref().map_or(interval.end, |record| record.t);
             right.hit(ray, right_limit)
         });
 

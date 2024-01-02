@@ -1,4 +1,8 @@
-use crate::{geometry::{ray::Ray, aabb::AABB}, materials::material::*, vector::vec3::Vec3};
+use crate::{
+    geometry::{aabb::AABB, ray::Ray},
+    materials::material::*,
+    vector::vec3::Vec3,
+};
 use std::ops::Range;
 
 #[derive(Clone)]

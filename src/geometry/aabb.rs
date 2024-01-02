@@ -1,10 +1,9 @@
+use crate::geometry::ray::Ray;
+use crate::tools::interval::Interval;
+use crate::vector::{Point, Vec3};
 use std::cmp::{max, min};
 use std::mem::swap;
 use std::ops::{BitOr, Range};
-use crate::tools::interval::Interval;
-use crate::vector::{Vec3, Point};
-use crate::geometry::ray::Ray;
-
 
 // Axis-Aligned Bounding Boxes
 // 三维空间的盒子，最小坐标 + 最大坐标 的 矩形
@@ -15,7 +14,9 @@ pub struct AABB {
 
 impl Default for AABB {
     fn default() -> Self {
-        Self { axis: Default::default() }
+        Self {
+            axis: Default::default(),
+        }
     }
 }
 
@@ -63,19 +64,11 @@ impl AABB {
     }
 
     pub fn min(&self) -> Vec3 {
-        Vec3::new(
-            self.axis[0].min,
-            self.axis[1].min,
-            self.axis[2].min,
-        )
+        Vec3::new(self.axis[0].min, self.axis[1].min, self.axis[2].min)
     }
 
     pub fn max(&self) -> Vec3 {
-        Vec3::new(
-            self.axis[0].max,
-            self.axis[1].max,
-            self.axis[2].max,
-        )
+        Vec3::new(self.axis[0].max, self.axis[1].max, self.axis[2].max)
     }
 
     pub fn center(&self) -> Vec3 {

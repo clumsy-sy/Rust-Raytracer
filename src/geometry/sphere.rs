@@ -82,6 +82,9 @@ impl Hittable for Sphere {
     fn bbox(&self) -> Option<super::AABB> {
         let r = self.radius;
         let c = self.center;
-        Some(AABB::from_points(&(c - Vec3::new(r, r, r)), &(c + Vec3::new(r, r, r))))
+        Some(AABB::from_points(
+            &(c - Vec3::new(r, r, r)),
+            &(c + Vec3::new(r, r, r)),
+        ))
     }
 }

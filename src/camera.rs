@@ -1,7 +1,6 @@
 use crate::geometry::ray::*;
-use crate::vector::vec3::{Vec3, Point};
 use crate::global::degrees_to_radians;
-
+use crate::vector::vec3::{Point, Vec3};
 
 pub struct Camera {
     pub origin: Point,
@@ -71,10 +70,11 @@ impl Camera {
         let p = self.lens_radius * Vec3::random_in_unit_disk();
         let offset = self.u * p.x() + self.v * p.y();
 
-        Ray{
+        Ray {
             orig: self.origin + offset,
-            dir:self.lower_left_corner + s * self.horizontal + t * self.vertical - self.origin - offset,
+            dir: self.lower_left_corner + s * self.horizontal + t * self.vertical
+                - self.origin
+                - offset,
         }
     }
 }
-

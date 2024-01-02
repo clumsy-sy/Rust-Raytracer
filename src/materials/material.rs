@@ -40,8 +40,7 @@ impl Material {
                 })
             }
             Material::Metal { albedo, fuzz } => {
-                let reflected: Vec3 =
-                    Vec3::reflect(r_in.dir.unit_vector_self(), hit_record.normal);
+                let reflected: Vec3 = Vec3::reflect(r_in.dir.unit_vector_self(), hit_record.normal);
                 let scattered = Ray {
                     orig: hit_record.point,
                     dir: reflected + *fuzz * Vec3::random_unit_vector(),
