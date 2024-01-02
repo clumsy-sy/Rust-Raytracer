@@ -1,4 +1,4 @@
-# Rust Raytracer
+# [Rust Raytracer](https://github.com/clumsy-sy/Rust-Raytracer)
 
 利用 Rust 实现一个光线追踪渲染器，主要的实现内容来自 [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)，原文是用 C++ 实现的光线追踪渲染器的课程。
 
