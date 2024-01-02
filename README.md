@@ -1,9 +1,5 @@
 # Rust Raytracer
 
-利用 Rust 实现一个光线追踪渲染器
-
-## 目标
-
 利用 Rust 实现一个光线追踪渲染器，主要的实现内容来自 [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)，原文是用 C++ 实现的光线追踪渲染器的课程。
 
 ## 编译运行
@@ -19,7 +15,7 @@ cargo run --example [文件名(不带 .rs)] --release
 ### 挑战
 
 - [x] 实现 BVH
-- [x] 实现**多线程渲染**加速
+- [x] 实现**多线程**加速
 - [ ] 实现对三角形的支持
 - [ ] 实现对 obj 文件的支持
 - [ ] 实现 Ray Tracing in One Weekend  —  The Book Series 的第二本，[Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html)
